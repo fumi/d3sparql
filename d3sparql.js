@@ -1955,7 +1955,7 @@ d3sparql.namedmap = function(json, config) {
           return d3.sum(d, function(d) {
             return parseInt(d[opts.value].value)
           })
-        }).map(data, d3.map)
+        }).map(data)
   var extent = d3.extent((d3.map(size).values()))
 
   if (d3sparql.debug) { console.log(JSON.stringify(size)) }
@@ -1965,7 +1965,7 @@ d3sparql.namedmap = function(json, config) {
     .attr("height", opts.height)
 
   d3.json(opts.topojson, function(topojson_map) {
-    var geo = topojson.object(topojson_map, topojson_map.objects[opts.mapname]).geometries
+    var geo = topojson.feature(topojson_map, topojson_map.objects[opts.mapname]).features
     var projection = d3.geo.mercator()
       .center([opts.center_lng, opts.center_lat])
       .translate([opts.width/2, opts.height/2])
